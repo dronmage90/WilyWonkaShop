@@ -23,6 +23,7 @@ class Product(models.Model):
     company = models.ForeignKey(Company,
                                 on_delete=models.RESTRICT,
                                 related_name='ID')
+    sold=models.BooleanField(default=False)
 
     def to_json(self):
         return {
@@ -30,5 +31,6 @@ class Product(models.Model):
             'name': self.name,
             'description': self.description,
             'price': self.price,
-            'company': self.company.name
+            'company': self.company.name,
+            'sold': self.sold
         }
