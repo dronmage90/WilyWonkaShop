@@ -17,6 +17,7 @@ class Category(models.Model):
                              on_delete=models.CASCADE,
                              null=True,
                              blank=True)
+    home = models.BooleanField(default=False)
 
     class Meta:
         verbose_name = 'Category'
@@ -28,7 +29,8 @@ class Category(models.Model):
     def to_json(self):
         return {
             'id': self.id,
-            'name': self.name
+            'name': self.name,
+            'home':self.home
         }
 
 
@@ -44,7 +46,7 @@ class Product(models.Model):
         verbose_name_plural = 'Products'
 
     def __str__(self):
-        return f'{self.name}:{self.category}'
+        return f'{self.name}'
 
     def to_json(self):
         return {
@@ -53,4 +55,16 @@ class Product(models.Model):
             'price': self.price,
             'sold': self.sold,
             'category': self.category.to_json(),
+        }
+class Commits(models.Model):
+    name = models.CharField(max_length=255)
+    price = models.IntegerField(default=5)
+    text  = models.TextField()
+
+    def to_json(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+            'price': self.price,
+            'text': self.text,
         }

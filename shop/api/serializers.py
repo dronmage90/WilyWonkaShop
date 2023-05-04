@@ -29,7 +29,7 @@ class ProductSerializer(serializers.Serializer):
     name = serializers.CharField()
     price = serializers.IntegerField()
     sold = serializers.BooleanField(default=False)
-
+    category = CategorySerializer1
     def create(self, validated_data):
         product = Product.objects.create(**validated_data)
         return product
